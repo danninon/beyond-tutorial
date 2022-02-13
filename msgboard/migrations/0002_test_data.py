@@ -1,8 +1,11 @@
 from django.db import migrations, transaction
 
+
 class Migration(migrations.Migration):
 
-    dependencies = [('msgboard', '0001_initial'),]
+    dependencies = [
+        ('msgboard', '0001_initial'),
+        ]
 
     def generate_data(apps, schema_editor):
         from msgboard.models import Message
@@ -14,8 +17,8 @@ class Migration(migrations.Migration):
 
         with transaction.atomic():
             for author, text in test_data:
-              Message (author=author, text=text).save()
+                Message(author=author, text=text).save()
 
-            operations = [
-                migrations.RunPython(generate_data),
+    operations = [
+         migrations.RunPython(generate_data),
             ]
